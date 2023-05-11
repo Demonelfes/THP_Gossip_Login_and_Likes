@@ -1,0 +1,31 @@
+<h1>Créer son profil</h1>
+
+<%= form_tag url_for(action: 'create'), method: "post" do %>
+    <%= label_tag 'Email' %>
+    <%= text_field_tag "email", @email %>
+    <br /> <br />
+    <%= label_tag 'Password' %>
+    <%= text_field_tag 'password', @password %>
+    <br /> <br />
+    <%= label_tag 'Confirm' %>
+    <%= text_field_tag "password_confirm", @password_confirm %>
+    <br /> <br />
+    <%= label_tag 'prénom' %>
+    <%= text_field_tag "first_name", @first_name %>
+    <br /> <br />
+    <%= label_tag 'nom' %>
+    <%= text_field_tag "last_name", @last_name %>
+    <br /> <br />
+    <%= label_tag 'description' %>
+    <%= text_field_tag "description", @description %>
+    <br /> <br />
+    <%= label_tag 'age' %>
+    <%= text_field_tag "age", @age %>
+    <br /> <br />
+    <%= label_tag 'ville' %>
+    <%= text_field_tag "city_id", @city_id %>
+    <br /> <br />
+
+    <br /> <br />
+    <%= submit_tag "S'inscrire'" %>
+  <% end %>

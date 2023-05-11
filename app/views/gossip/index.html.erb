@@ -1,0 +1,48 @@
+<body>
+
+<% if params[:success] %>
+  <div class="alert alert-success" role="alert">
+    Votre potin a été créé avec succès !
+  </div>
+<% end %>
+<% if params[:edit_success] %>
+  <div class="alert alert-success" role="alert">
+    Votre potin a été modifie avec succès !
+  </div>
+<% end %>
+<% if params[:destroy_success] %>
+  <div class="alert alert-success" role="alert">
+    Votre potin a été supprime avec succès !
+  </div>
+<% end %>
+
+<% if params[:update_failed] || params[:destroy_failed] %>
+  <div class="alert alert-danger" role="alert">
+    Ce n'est pas votre potin !
+  </div>
+<% end %>
+
+
+
+<div class="jumbotron">
+        <div class="container text-center justify-content-center">
+          <h2>Bienvenue <% if logged_in? %>
+              <%= current_user_name %> !
+              <% else %>
+              !
+              <% end %>
+          </h2>
+          <p><%= link_to "Cliquez ici pour creer votre propre potin.", new_gossip_path, :class => "btn btn-dark"%></p>
+        </div>
+</div>
+
+
+<div class="container text-center justify-content-center">
+<h2>Voici la liste de tous les potins : </h2><br/>
+    <%@all_gossips.each do |elem|%>
+    <%=elem.user.first_name%> : <%= elem.title%> : Commentaires : <%=elem.comments.count%> <br/>
+    <%= link_to "Cliquez ici pour voir le profil de l'utilisateur.", user_path(elem.user.id), :class => " btn btn-dark"%>
+    <%= link_to "Cliquez ici pour lire le potin.", gossip_path(elem.id), :class => " btn btn-dark"%> <br/>
+    <%end%>
+</div>
+</body>

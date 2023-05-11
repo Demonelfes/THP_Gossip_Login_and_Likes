@@ -1,0 +1,15 @@
+<div class="container text-center justify-content-center">
+<h1>Bienvenue sur la page de la Ville de <%=@city.name %></h1>
+
+<h2>Voici la liste de potins écrits dans cette ville : </h2><br/>
+<%@city.gossips.each do |elem|%>
+    <%=elem.user.first_name%> : <%=elem.title%> <br/>
+    <%=elem.content %> <br/>
+<%end%>
+
+</div>
+
+
+<h1>City#show</h1>
+<p>Find me in app/views/city/show.html.erb</p>
+</div>

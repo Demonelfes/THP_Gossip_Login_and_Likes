@@ -1,0 +1,52 @@
+<% if params[:destroy_success] %>
+  <div class="alert alert-success" role="alert">
+    Votre commentaire a été supprimé avec succès !
+  </div>
+<% end %>
+
+
+<div class="container text-center justify-content-center">
+
+<h1>Bienvenue sur la page Gossip n°<%=@current_gossip.id %></h1>
+
+<p>Auteur du Potin : <%=@current_gossip.user.first_name %> </p>
+<p>Titre du Potin : <%=@current_gossip.title %></p>
+<p>Date de creation du Potin : <%=@current_gossip.created_at %></p>
+<p>Potin : <%=@current_gossip.content %></p>
+
+ <p>
+  <%if logged_in? && @current_gossip.user.id == current_user.id%>
+<%= link_to "Cliquez ici pour modifier votre propre potin.", edit_gossip_path(@current_gossip.id), :class => "btn btn-dark"%>
+
+</p>
+ <%= form_tag gossip_path(@current_gossip.id), method: "delete" do %>
+    <%= submit_tag "Cliquez ici pour supprimer ce potin.",  :class => "btn btn-dark" %>
+    <% end %>
+<%end%>
+<br/>
+
+
+<p>Lien vers la page de l'auteur : <br/><%= link_to "Cliquer ici.", user_path(@current_gossip.user.id), :class => "btn btn-dark"%></p>
+
+Commentaires (<%=@current_gossip.comments.count%>) :
+<div class="container text-center">
+    <%@current_gossip.comments.each do |elem|%>
+        <p><strong> <%= elem.user.first_name%></strong> :
+        <%= elem.content%>
+            <%if logged_in? && elem.user.id == current_user.id%>
+        <small><%= button_to "Supprimer", gossip_comment_path(@current_gossip.id, elem.id), form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete, class: "btn btn-dark" %></small>
+         <%= link_to "Editer", edit_gossip_comment_path(@current_gossip.id, elem.id), :class => "btn btn-dark"%>
+         </p>
+         <%end%>
+      <%end%>
+</div>
+<div>
+  <%= form_with url: url_for(controller: 'comment', action: 'create', gossip_id: @current_gossip.id) do |form| %>
+    <%= form.label :commentaire %>
+    <%= form.text_area :content %>
+
+    <%= form.submit %>
+  <% end %>
+</div>
+</div>
+

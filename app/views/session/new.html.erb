@@ -1,0 +1,22 @@
+<h1>Connexion</h1>
+<% if flash[:danger] %>
+  <div class="alert alert-danger" role="alert">
+    Veuillez vous connecter.
+  </div>
+<% end %>
+<% if params[:logged_in_failed] %>
+  <div class="alert alert-danger" role="alert">
+    Veuillez vous connecter !
+  </div>
+<% end %>
+<%= form_tag url_for(action: 'create'), method: "post" do %>
+    <%= label_tag 'Email' %>
+    <%= text_field_tag "email", @email %>
+    <br /> <br />
+    <%= label_tag 'Password' %>
+    <%= text_field_tag 'password', @password %>
+    <br /> <br />
+
+    <br /> <br />
+    <%= submit_tag "Se connecter" %>
+  <% end %>

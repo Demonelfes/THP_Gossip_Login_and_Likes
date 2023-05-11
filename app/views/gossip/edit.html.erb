@@ -1,0 +1,31 @@
+<body data-turbo="false">
+  <%= yield %>
+
+<% if @current_gossip.errors.any? %>
+<div class="alert alert-danger" role="alert">
+  <p>Nous n'avons pas réussi à modifier le potin pour la (ou les) raison(s) suivante(s) :</p>
+  <ul>
+    <% @current_gossip.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div>
+  <%= form_tag url_for(action: 'update'), method: "patch" do %>
+    <%= label_tag 'Title' %>
+    <%= text_field_tag 'title', @current_gossip.title %>
+    <br /> <br />
+    <%= label_tag 'Content' %>
+    <%= text_area_tag 'content', @current_gossip.content %>
+    <br /> <br />
+    <br /> <br />
+    <%= submit_tag "Edit Gossip" %>
+  <% end %>
+</div>
+
+
+<h1>Gossip#edit</h1>
+<p>Find me in app/views/gossip/edit.html.erb</p>
+</body>
