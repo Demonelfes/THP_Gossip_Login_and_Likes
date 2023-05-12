@@ -12,4 +12,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true,
   format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/ } #/\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
+  def remember(remember_token)
+    remember_digest = BCrypt::Password.create(remember_token)
+    self.update(remember_digest: remember_digest)
+  end
 end

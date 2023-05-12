@@ -4,6 +4,7 @@ class GossipController < ApplicationController
   def index
     @all_gossips = Gossip.all
     @all_users = User.all
+    binding.pry
   end
 
   def new
