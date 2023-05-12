@@ -19,6 +19,7 @@ current_city_ids = City.ids
 #Création des users OK
 10.times do
   user = User.create!(first_name: Faker::Name.first_name,
+  password_digest: "test",
   last_name: Faker::Name.unique.last_name,
   description: Faker::Quote.unique.famous_last_words,
   email: Faker::Internet.unique.email ,
